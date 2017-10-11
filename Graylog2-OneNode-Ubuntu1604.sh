@@ -35,6 +35,9 @@ sed -i -e "s/rest_listen_uri = http:\/\/127.0.0.1:9000\//rest_listen_uri = http:
 sed -i -e "s/#web_listen_uri = http:\/\/127.0.0.1:9000\//web_listen_uri = http:\/\/$IPV4:9000\//g" /etc/graylog/server/server.conf
 SECRET=$(pwgen -s 96 1)
 sed -i -e 's/password_secret =.*/password_secret = '$SECRET'/' /etc/graylog/server/server.conf
+echo
+echo -n "Enter the password for admin login [ENTER]: "
+read ADMIN_PASSWORD
 PASSWORD=$(echo -n $ADMIN_PASSWORD | sha256sum | awk '{print $1}')
 sed -i -e 's/root_password_sha2 =.*/root_password_sha2 = '$PASSWORD'/' /etc/graylog/server/server.conf
 
@@ -43,3 +46,14 @@ sed -i -e 's/root_password_sha2 =.*/root_password_sha2 = '$PASSWORD'/' /etc/gray
 systemctl daemon-reload
 systemctl enable graylog-server.service
 systemctl start graylog-server.service
+
+
+#Final output confirmation
+echo
+echo "#######################################"
+echo "# Congrats the installation is finished"
+echo "# You should be able to view the app at:
+echo "########## http://$IPV4:9000 ##########
+echo "# If you want to change the URL, please
+echo "# read the docs http://docs.graylog.org
+echo "#######################################"
