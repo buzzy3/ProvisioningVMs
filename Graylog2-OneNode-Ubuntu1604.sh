@@ -5,7 +5,7 @@
 
 #Prerequisites
 apt update && sudo apt upgrade -y
-apt -y install apt-transport-https openjdk-8-jre-headless uuid-runtime python-software-properties debconf-utils pwgen
+apt -y install apt-transport-https openjdk-8-jre-headless uuid-runtime pwgen
 
 
 #MongoDB (version included in 16.04 LTS)
