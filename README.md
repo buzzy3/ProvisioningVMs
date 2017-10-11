@@ -1,7 +1,9 @@
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
+
 # ProvisioningVMs
 Bash scripts to (ideally) provision a VM for "automated-ish" deployment
 
-# Usage
+## Usage
 1. Find the provisioning file you desire (they're each pretty descriptive with version numbers and Linux kernels).
 2. Use a wget command in your terminal window similar to this one: 
 
@@ -14,3 +16,6 @@ Bash scripts to (ideally) provision a VM for "automated-ish" deployment
 4. Run the bash script by changing to the directory (assumed to be home "~/"), then:
 
 `./Graylog2-OneNode-Ubuntu1604.sh`
+
+## License
+_ProvisioningVMs_ is released under the [MIT License](LICENSE).
