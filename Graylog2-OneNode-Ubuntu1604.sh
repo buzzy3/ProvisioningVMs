@@ -52,8 +52,8 @@ systemctl start graylog-server.service
 echo
 echo "#######################################"
 echo "# Congrats the installation is finished"
-echo "# You should be able to view the app at:
-echo "########## http://$IPV4:9000 ##########
-echo "# If you want to change the URL, please
-echo "# read the docs http://docs.graylog.org
+echo "# You should be able to view the app at"
+echo "########## http://$IPV4:9000 ##########"
+echo "# If you want to change the URL, please"
+echo "# read the docs http://docs.graylog.org"
 echo "#######################################"
