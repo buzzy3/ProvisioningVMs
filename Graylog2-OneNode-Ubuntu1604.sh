@@ -1,6 +1,7 @@
 #!/bin/bash
 #Concept taken from fodor.xyz
 #Install from Graylog Docs http://docs.graylog.org/en/2.3/pages/installation/os/ubuntu.html
+#Approx. 12 min. install based on AWS EC2 t2.micro https://aws.amazon.com/ec2/instance-types/
 
 
 #Prerequisites
@@ -36,7 +37,7 @@ sed -i -e "s/#web_listen_uri = http:\/\/127.0.0.1:9000\//web_listen_uri = http:\
 SECRET=$(pwgen -s 96 1)
 sed -i -e 's/password_secret =.*/password_secret = '$SECRET'/' /etc/graylog/server/server.conf
 echo
-echo -n "Enter the password for admin login [ENTER]: "
+echo -n "Enter a password for graylog admin [ENTER]: "
 read ADMIN_PASSWORD
 PASSWORD=$(echo -n $ADMIN_PASSWORD | sha256sum | awk '{print $1}')
 sed -i -e 's/root_password_sha2 =.*/root_password_sha2 = '$PASSWORD'/' /etc/graylog/server/server.conf
@@ -53,7 +54,11 @@ echo
 echo "#######################################"
 echo "# Congrats the installation is finished"
 echo "# You should be able to view the app at"
-echo "########## http://$IPV4:9000 ##########"
+echo "#"
+echo "# http://$IPV4:9000"
+echo "# username: admin"
+echo "# password: $ADMIN_PASSWORD"
+echo "#"
 echo "# If you want to change the URL, please"
 echo "# read the docs http://docs.graylog.org"
 echo "#######################################"
