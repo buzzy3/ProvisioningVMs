@@ -18,7 +18,7 @@ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /e
 apt update && apt -y install elasticsearch
 
 #Elasticsearch config
-sed -i -e 's/# cluster.name: my-application$/cluster.name: graylog/g' /etc/elasticsearch/elasticsearch.yml
+sed -i -e 's/#cluster.name: my-application$/cluster.name: graylog/g' /etc/elasticsearch/elasticsearch.yml
 systemctl daemon-reload
 systemctl enable elasticsearch.service
 systemctl restart elasticsearch.service
@@ -30,11 +30,12 @@ dpkg -i graylog-2.3-repository_latest.deb
 apt update && apt -y install graylog-server
 
 #Graylog config
-sed -i -e "s/rest_listen_uri = http:\/\/127.0.0.1:9000\//rest_listen_uri = http:\/\/${IPV4}:9000\//g" /etc/graylog/server/server.conf
-sed -i -e "s/#web_listen_uri = http:\/\/127.0.0.1:9000\//web_listen_uri = http:\/\/${IPV4}:9000\//g" /etc/graylog/server/server.conf
+IPV4=$(ifconfig | grep -oP "(?<=inet addr:).*?(?=Bcast)")
+sed -i -e "s/rest_listen_uri = http:\/\/127.0.0.1:9000\//rest_listen_uri = http:\/\/$IPV4:9000\//g" /etc/graylog/server/server.conf
+sed -i -e "s/#web_listen_uri = http:\/\/127.0.0.1:9000\//web_listen_uri = http:\/\/$IPV4:9000\//g" /etc/graylog/server/server.conf
 SECRET=$(pwgen -s 96 1)
 sed -i -e 's/password_secret =.*/password_secret = '$SECRET'/' /etc/graylog/server/server.conf
-PASSWORD=$(echo -n $ADMIN_PASSWORD | shasum -a 256 | awk '{print $1}')
+PASSWORD=$(echo -n $ADMIN_PASSWORD | sha256sum | awk '{print $1}')
 sed -i -e 's/root_password_sha2 =.*/root_password_sha2 = '$PASSWORD'/' /etc/graylog/server/server.conf
 
 
