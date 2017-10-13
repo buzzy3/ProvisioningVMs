@@ -31,29 +31,29 @@ echo -e "
              ${Red}_aOXOXXXXXXXXXXXXXXXXXXXX4XL_             
           ${Red}_jXUXOXXXXXXXXXXXXXXXXXXXXXXXXXX4L,          
         ${Red}_jXXXXXXXXXXXXXXXX2!3XXXXXXXXXXXXXXOXG_        
-       ${Red}aOXXXOXXXXXXX""'          ""4OXXXXXXXXXXL,      
-     ${Red}_dXOXXXXXXXO"'                  "4OXXXXXXXOX,     
-    ${Red}_XXXXXXXXXX"                       -3XXXXXXXXXa    
-   ${Red}_XXXXXXXXO7               ${White}_,          ${Red}"XXXXXXXXXs   
+       ${Red}aOXXXOXXXXXXX''           ''4OXXXXXXXXXXL,      
+     ${Red}_dXOXXXXXXXO''                  ''4OXXXXXXXOX,     
+    ${Red}_XXXXXXXXXX'                       -3XXXXXXXXXa    
+   ${Red}_XXXXXXXXO7               ${White}_,          ${Red}'XXXXXXXXXs   
    ${Red}XXXXXXXXX7                ${White}++,          ${Red}-XXXXXXXXX,  
   ${Red}=4XXXXXXX7          ${White}.,    .]+=           ${Red}=XXXXXOXXn  
   ${Red}UXXXXXXXO          ${White}.++.   :+=+,           ${Red}*OXXXXXXXi 
  ${Red}?XXXXXXXOi          ${White}=]+;   +]-=;  ._       ${Red}=OXXXXXXXi 
- ${Red}=XXXXXXXXi    ${White}._,  ;]`:+  .]: ++,.++].      ${Red}XXXXOXXXX 
- ${Red}=4XXXXXOX(    ${White}+++++]` :+; :+` -=;=+`=`      ${Red}XXXXXXXXX 
+ ${Red}=XXXXXXXXi    ${White}._,  ;]':+  .]: ++,.++].      ${Red}XXXXOXXXX 
+ ${Red}=4XXXXXOXi    ${White}+++++]` :+, :+` -=,=+'=.      ${Red}XXXXXXXXX 
  ${Red}=4XXXXXXXi    ${White}-~-      +] ++   =++/        ${Red}.XXXXXXXX2 
- ${Red}?XXXXXXXXL             ${White}:]_+;   :++         ${Red}?OXXXXOXXi 
-  ${Red}XXXXXXXXXi             ${White}]+]:    -         ${Red}_XXXXXXXXX' 
-  ${Red}=XXXXXOXXX,            ${White}=++              ${Red}.jXOXXXOXX7  
-   ${Red}3XXXXXXXXX,           ${White}-+;             ${Red}.jXXXXXXXXX'  
-    ${Red}4XXXXXXXXXn                         a3XXXXXXXXX'   
-    ${Red}-3XXOXXXXXXXa                     _jXXXXXXXOXO'    
-      ${Red}*OXXXXXXXXOXn_               _aO4UXXXXXXXX7'     
-       ${Red}-XXXXOXXXXXXXXXa_a,   ._a_dXXOOXXXXXXXXX!       
-         ${Red}"XXXXXXXXXXXXOXXXXXXX4XXUXXXXXXXXOXX"         
-           ${Red}"*OOXXXOXXXXXXXXXXXXXXXXXXXXXXX7"           
-              ${Red}"!XXXXXXOXXXXXXXXXXXXXXXX7"              
-                  ${Red}-"""4XOXOXXXXX2!""^                  
+ ${Red})XXXXXXXXL             ${White}:]_+,   :++         ${Red}iOXXXXOXXi 
+  ${Red}XXXXXXXXXi             ${White}]+]:    -         ${Red}_XXXXXXXXX 
+  ${Red}-XXXXXOXXX,            ${White}=++              ${Red}.jXOXXXOXX7  
+   ${Red}3XXXXXXXXX,           ${White}-+,             ${Red}.jXXXXXXXXX  
+    ${Red}4XXXXXXXXXn                         a3XXXXXXXXX   
+    ${Red}-3XXOXXXXXXXa                     _jXXXXXXXOXO    
+      ${Red}'OXXXXXXXXOXn_               _aO4UXXXXXXXX7     
+       ${Red}-XXXXOXXXXXXXXXa_a,   ._a_dXXOOXXXXXXXXXI       
+         ${Red}'XXXXXXXXXXXXOXXXXXXX4XXUXXXXXXXXOXX'         
+           ${Red}'OOXXXOXXXXXXXXXXXXXXXXXXXXXXX7'           
+              ${Red}'XXXXXXOXXXXXXXXXXXXXXXX7'              
+                  ${Red}-''4XOXOXXXXX2''^                  
 "
 echo -e "                         Installation Menu\n         ${Bold}Graylog v.${GRYLOG_VER} - Open Source Log Management\n" && tput sgr0
 echo   
