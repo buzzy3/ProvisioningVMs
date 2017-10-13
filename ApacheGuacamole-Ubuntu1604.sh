@@ -6,10 +6,18 @@
 VERSION="0.9.13"
 MCJVERSION="5.1.43"
 
+Black=`tput setaf 0`   #${Black}
+Red=`tput setaf 1`     #${Red}
 Green=`tput setaf 2`   #${Green}
 Yellow=`tput setaf 3`  #${Yellow}
+Blue=`tput setaf 4`    #${Blue}
+Magenta=`tput setaf 5` #${Magenta}
+Cyan=`tput setaf 6`    #${Cyan}
 White=`tput setaf 7`   #${White}
+Bold=`tput bold`       #${Bold}
+Rev=`tput smso`        #${Rev}
 Reset=`tput sgr0`      #${Reset}
+Bold=`tput bold`       #${Bold}
 
 clear
 echo -e "
@@ -38,7 +46,7 @@ echo -e "
                  ${White}':sdNNMMMMMMMMMMMMMMMMMMMNNds:'                 
                      ${White}'-/+syhdmNNNNNNmdhyo/-'                     
 "
-echo -e "                         Installation Menu\n         ${Bold}Guacamole Remote Desktop Gateway ${GUACA_VER}\n" && tput sgr0
+echo -e "                         Installation Menu\n         ${Bold}Guacamole Remote Desktop Gateway ${VERSION}\n" && tput sgr0
 echo 
 
 # Grab a password for MySQL Root
