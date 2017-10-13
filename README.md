@@ -7,13 +7,13 @@ Bash scripts to (ideally) provision a VM for "automated-ish" deployment
 1. Find the provisioning file you desire (they're each pretty descriptive with version numbers and Linux kernels).
 2. Use a wget command in your terminal window similar to this one: 
 
-`wget -O Graylog2-OneNode-Ubuntu1604.sh https://raw.githubusercontent.com/tscibilia/ProvisioningVMs/master/Graylog2-OneNode-Ubuntu1604.sh`
+`wget https://raw.githubusercontent.com/tscibilia/ProvisioningVMs/master/Graylog2-OneNode-Ubuntu1604.sh`
 
 3. Make the bash script you downloaded executable similar to this:
 
 `chmod +x Graylog2-OneNode-Ubuntu1604.sh`
 
-4. Run the bash script by changing to the directory (assumed to be home "~/"), then:
+4. Run the script as root:
 
 `./Graylog2-OneNode-Ubuntu1604.sh`
 
