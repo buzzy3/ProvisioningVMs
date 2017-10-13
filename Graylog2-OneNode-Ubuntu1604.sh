@@ -3,62 +3,112 @@
 #Install from Graylog Docs http://docs.graylog.org/en/2.3/pages/installation/os/ubuntu.html
 #Approx. 12 min. install based on AWS EC2 t2.micro https://aws.amazon.com/ec2/instance-types/
 
+Black=`tput setaf 0`   #${Black}
+Red=`tput setaf 1`     #${Red}
+Green=`tput setaf 2`   #${Green}
+Yellow=`tput setaf 3`  #${Yellow}
+Blue=`tput setaf 4`    #${Blue}
+Magenta=`tput setaf 5` #${Magenta}
+Cyan=`tput setaf 6`    #${Cyan}
+White=`tput setaf 7`   #${White}
+Bold=`tput bold`       #${Bold}
+Rev=`tput smso`        #${Rev}
+Reset=`tput sgr0`      #${Reset}
+Bold=`tput bold`       #${Bold}
+GRYLOG_VER="2.3.X"
+IPV4=$(hostname -i)
+ADMIN_PASSWORD="admin"
+PWD=`pwd`
+filename="${PWD}/graylog-${GRYLOG_VER}."$(date +"%d-%y-%b")""
+logfile="${filename}.log"
+
+clear
+echo -e "
+                                                       
+                       ${Red}._a_a_a_a_a_.                      
+                  ${Red}_a_4XXXXXXXXXXXXXXXXa__                
+               ${Red}_aOXOXXXXXXXXXXXXXXXXXXXX4XL_             
+            ${Red}_jXUXOXXXXXXX7********4XXXXXXXXX4L,          
+          ${Red}_jXXXXXXXXX7'              '4XXXXXXOXG_        
+         ${Red}aOXXXOXXXX'                   '4XXXXXXXXL,      
+       ${Red}_dXOXXXXXX'                       '4OXXXXXXOX,     
+      ${Red}XXXXXXXXX'                           -3XXXXXXXa,     
+    ${Red}.4XXXXXXX7'         ${White}.,    .]+=          ${Red}'=XXXXOXXn,  
+    ${Red}UXXXXXXXO          ${White}.++.   :+=+,           ${Red}*OXXXXXXi 
+   ${Red}?XXXXXXXO           ${White}=]+;   +]-=;  ._        ${Red}OXXXXXXXi 
+   ${Red}=XXXXXXXi     ${White}._,  ;]':+  .]: ++,.++].      ${Red}XXXXOXXXX 
+   ${Red}=4XXXXXXi     ${White}+++++]' :+, :+' -=,=+'=.      ${Red}XXXXXXXXX 
+   ${Red}=4XXXXXXi     ${White}-~-      +] ++   =++/        ${Red}.XXXXXXXX2 
+   ${Red}'XXXXXXXXL             ${White}:]_+,   :++         ${Red}iOXXXXOXXi 
+    ${Red}XXXXXXXXi              ${White}]+]:    -         ${Red}_XXXXXXXXX, 
+    ${Red}-XXXXXOXXX,            ${White}=++              ${Red}.jXOXXXOXX7  
+     ${Red}3XXXXXXXXX,           ${White}-+,            ${Red}.jXXXXXXXXXX  
+      ${Red}'OXXXXXXXOXn_                     _aO4UXXXXXXX7     
+        ${Red}-XXXXOXXXXXaa,               ._a_dXXOOXXXXX      
+           ${Red}'XXXXXXXXXXOia,..........ajXUXXXXXXOXX'         
+             ${Red}'OOXXXOXXXXXXXXXXXXXXXXXXXXXXXX7'           
+                ${Red}'XXXXXXOXXXXXXXXXXXXXXXXX7'              
+                    ${Red}-''4XOXOXXXXXXX2''^                  
+"
+echo -e "                         Installation Menu\n         ${Bold}Graylog v.${GRYLOG_VER} - Open Source Log Management\n" && tput sgr0
+echo   
+echo -n "${Green}Please enter a password for the graylog admin [ENTER]: ${Reset}"
+read ADMIN_PASSWORD
+ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+
 
 #Prerequisites
-apt update && sudo apt upgrade -y
-apt -y install apt-transport-https openjdk-8-jre-headless uuid-runtime pwgen
+apt update && sudo apt upgrade -y | tee -a $logfile
+apt -y install apt-transport-https openjdk-8-jre-headless uuid-runtime pwgen | tee -a $logfile
 
 
 #MongoDB (version included in 16.04 LTS)
-apt -y install mongodb-server
+apt -y install mongodb-server | tee -a $logfile
 
 
 #Elasticsearch 5.x 
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
-apt update && apt -y install elasticsearch
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - | tee -a $logfile
+echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list $logfile
+apt update && apt -y install elasticsearch | tee -a $logfile
 
 #Elasticsearch config
 sed -i -e 's/#cluster.name: my-application$/cluster.name: graylog/g' /etc/elasticsearch/elasticsearch.yml
-systemctl daemon-reload
-systemctl enable elasticsearch.service
-systemctl restart elasticsearch.service
+systemctl daemon-reload | tee -a $logfile
+systemctl enable elasticsearch.service | tee -a $logfile
+systemctl restart elasticsearch.service | tee -a $logfile
 
 
 #Graylog 2.3.x
-wget https://packages.graylog2.org/repo/packages/graylog-2.3-repository_latest.deb
-dpkg -i graylog-2.3-repository_latest.deb
-apt update && apt -y install graylog-server
+wget https://packages.graylog2.org/repo/packages/graylog-2.3-repository_latest.deb | tee -a $logfile
+dpkg -i graylog-2.3-repository_latest.deb | tee -a $logfile
+apt update && apt -y install graylog-server | tee -a $logfile
 
 #Graylog config
-IPV4=$(hostname -i)
 sed -i -e "s/rest_listen_uri = http:\/\/127.0.0.1:9000\//rest_listen_uri = http:\/\/$IPV4:9000\//g" /etc/graylog/server/server.conf
 sed -i -e "s/#web_listen_uri = http:\/\/127.0.0.1:9000\//web_listen_uri = http:\/\/$IPV4:9000\//g" /etc/graylog/server/server.conf
 SECRET=$(pwgen -s 96 1)
 sed -i -e 's/password_secret =.*/password_secret = '$SECRET'/' /etc/graylog/server/server.conf
-echo
-echo -n "Enter a password for graylog admin [ENTER]: "
-read ADMIN_PASSWORD
 PASSWORD=$(echo -n $ADMIN_PASSWORD | sha256sum | awk '{print $1}')
 sed -i -e 's/root_password_sha2 =.*/root_password_sha2 = '$PASSWORD'/' /etc/graylog/server/server.conf
 
 
 #Cleanup & Startup
-systemctl daemon-reload
-systemctl enable graylog-server.service
-systemctl start graylog-server.service
+systemctl daemon-reload | tee -a $logfile
+systemctl enable graylog-server.service | tee -a $logfile
+systemctl start graylog-server.service | tee -a $logfile
 
 
 #Final output confirmation
 echo
-echo "#######################################"
-echo "# Congrats the installation is finished"
-echo "# You should be able to view the app at"
-echo "#"
-echo "# http://$IPV4:9000"
-echo "# username: admin"
-echo "# password: $ADMIN_PASSWORD"
-echo "#"
-echo "# If you want to change the URL, please"
-echo "# read the docs http://docs.graylog.org"
-echo "#######################################"
+echo "#######################################" | tee -a $logfile
+echo "# Congrats the installation is finished" | tee -a $logfile
+echo "# You should be able to view the app at" | tee -a $logfile
+echo "#" | tee -a $logfile
+echo "# http://$IPV4:9000" | tee -a $logfile
+echo "# username: admin" | tee -a $logfile
+echo "# password: $ADMIN_PASSWORD" | tee -a $logfile
+echo "#" | tee -a $logfile
+echo "# If you want to change the URL, please" | tee -a $logfile
+echo "# read the docs http://docs.graylog.org" | tee -a $logfile
+echo "#######################################" | tee -a $logfile
+echo "Log @: ${logfile}" | tee -a $logfile
