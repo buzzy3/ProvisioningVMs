@@ -53,7 +53,7 @@ echo -e "
 "
 echo -e "                         Installation Menu\n         ${Bold}Graylog v.${GRYLOG_VER} - Open Source Log Management\n" && tput sgr0
 echo   
-echo -n "${Blue}Please enter a password for the graylog admin [ENTER]: ${Yellow}"
+echo -n "${Blue}Please enter a password for the graylog admin [ENTER]: ${Reset}"
 read ADMIN_PASSWORD
 ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
 
